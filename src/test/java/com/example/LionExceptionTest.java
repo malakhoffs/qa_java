@@ -13,7 +13,7 @@ public class LionExceptionTest {
     String sex;
 
     @Parameterized.Parameters (name = "{index} Value = {0}")
-    public static Object [][] GetData () {
+    public static Object [][] getData () {
         return new Object[][] {
                 {"Неопределено"},
                 {null},
@@ -25,8 +25,8 @@ public class LionExceptionTest {
     }
 
     @Test
-    public void SexExceptions() {
-        Exception SexException = assertThrows ( Exception.class, () -> new Lion(sex, null));
-        Assert.assertEquals("Используйте допустимые значения пола животного - самец или самка", SexException.getMessage());
+    public void sexExceptions() {
+        Exception sexException = assertThrows ( Exception.class, () -> new Lion(sex, null));
+        Assert.assertEquals("Используйте допустимые значения пола животного - самец или самка", sexException.getMessage());
     }
 }

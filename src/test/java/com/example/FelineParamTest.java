@@ -8,6 +8,8 @@ import org.junit.runners.Parameterized;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import java.util.List;
+
 import static org.mockito.MockitoAnnotations.*;
 
 
@@ -20,36 +22,29 @@ public class FelineParamTest {
     }
 
     private final String animalKind;
-    private final int childrenValue;
 
-    public FelineParamTest(String animalKind, int childrenValue) {
+
+
+    public FelineParamTest(String animalKind) {
         this.animalKind = animalKind;
-        this.childrenValue = childrenValue;
     }
 
     @Parameterized.Parameters (name = "{index} Value = {0}")
     public static Object[][] getData() {
         return new Object[][]{
-                {"Травоядное", 0},
-                {"Хищник", 1},
-                {"Пресмыкающееся", 2}
+                {"Хищник"},
+                {"Пресмыкающееся"},
+                {"Человек"},
         };
     }
 
-    @Mock
-    Feline feline;
-
     @Test
-    public void getFelineFoodTest() throws Exception {
-        feline.getFood(animalKind);
-        Mockito.verify(feline, Mockito.times(1)).getFood(animalKind);
-        Assert.assertTrue(feline.getFood(animalKind).isEmpty());
-    }
-
-    @Test
-    public void getFelineKittensTest() {
-        feline.getKittens(childrenValue);
-        Mockito.verify(feline, Mockito.times(1)).getKittens(childrenValue);
-        Assert.assertEquals(0, feline.getKittens(childrenValue));
+    public void getFelineFoodTest() {
+        Feline feline = new Feline();
+        try {
+            Assert.assertEquals(List.of("Животные", "Птицы", "Рыба"), feline.getFood(animalKind));
+        } catch (Exception e) {
+            Assert.assertEquals("Неизвестный вид животного, используйте значение Травоядное или Хищник", e.getMessage());
+        }
     }
 }

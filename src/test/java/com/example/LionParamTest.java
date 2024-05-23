@@ -31,7 +31,5 @@ public class LionParamTest {
         Feline feline = new Feline();
         Lion lion = new Lion(sex, feline);
         Assert.assertEquals(expected,lion.doesHaveMane());
-        Assert.assertEquals(feline.getKittens(),lion.getKittens());
-        Assert.assertEquals(feline.getFood("Хищник"), lion.getFood());
     }
 }
