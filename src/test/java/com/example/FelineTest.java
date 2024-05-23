@@ -9,21 +9,23 @@ import java.util.List;
 
 public class FelineTest {
 
+    Feline feline = new Feline();
     @Test
     public void eatMeatTest() throws Exception {
-        Feline feline = new Feline();
         Assert.assertEquals(List.of("Животные", "Птицы", "Рыба"), feline.eatMeat());
     }
 
     @Test
     public void getKittensTest() {
-        Feline feline = new Feline();
         Assert.assertEquals(1, feline.getKittens());
+    }
+    @Test
+    public void getKittensDefaultTest() {
+        Assert.assertEquals(feline.getKittens(), feline.getKittens(1));
     }
 
     @Test
     public void getFamilyTest() {
-        Feline feline = new Feline();
         Assert.assertEquals("Кошачьи",feline.getFamily());
     }
 
