@@ -14,7 +14,7 @@ public class LionParamTest {
 
 
     @Parameterized.Parameters (name = "{index} = {0}")
-    public static Object [][] GetData () {
+    public static Object [][] getData () {
         return new Object[][] {
                 {"Самец", true},
                 {"Самка", false},
