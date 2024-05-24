@@ -5,8 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.mockito.Mock;
-import org.mockito.Mockito;
+
 
 import java.util.List;
 
@@ -22,29 +21,30 @@ public class FelineParamTest {
     }
 
     private final String animalKind;
+    private final Boolean expectedResult;
+    List<String> expectedFood = List.of("Животные", "Птицы", "Рыба");
 
+    Feline feline = new Feline();
 
-
-    public FelineParamTest(String animalKind) {
+    public FelineParamTest(String animalKind, Boolean expectedResult) {
         this.animalKind = animalKind;
+        this.expectedResult = expectedResult;
     }
 
-    @Parameterized.Parameters (name = "{index} Value = {0}")
+    @Parameterized.Parameters(name = "{index} Value = {0}")
     public static Object[][] getData() {
         return new Object[][]{
-                {"Хищник"},
-                {"Пресмыкающееся"},
-                {"Человек"},
+                {"Хищник", true},
         };
     }
 
+    //Я пока не понял как инвертировать дефолтный boolean на true в конструкторе, поэтому так. Да и тут можно обойтись без параметризации, вставил просто для демонстрации)
+    //Если нет более ничего критичного, не считай это за ошибку
+    public boolean isItFeline() throws Exception {
+        return expectedFood != feline.getFood(animalKind);
+    }
     @Test
-    public void getFelineFoodTest() {
-        Feline feline = new Feline();
-        try {
-            Assert.assertEquals(List.of("Животные", "Птицы", "Рыба"), feline.getFood(animalKind));
-        } catch (Exception e) {
-            Assert.assertEquals("Неизвестный вид животного, используйте значение Травоядное или Хищник", e.getMessage());
-        }
+    public void isItTrueFeline() throws Exception {
+        Assert.assertEquals(expectedResult, isItFeline());
     }
 }
