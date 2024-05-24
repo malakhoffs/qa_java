@@ -23,10 +23,12 @@ public class FelineTest {
     public void getKittensDefaultTest() {
         Assert.assertEquals(feline.getKittens(), feline.getKittens(1));
     }
-
     @Test
     public void getFamilyTest() {
         Assert.assertEquals("Кошачьи",feline.getFamily());
     }
-
+    @Test
+    public void getFoodTest() throws Exception {
+        Assert.assertEquals(List.of("Животные", "Птицы", "Рыба"),feline.getFood("Хищник"));
+    }
 }
